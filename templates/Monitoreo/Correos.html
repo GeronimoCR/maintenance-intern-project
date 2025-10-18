@@ -1,0 +1,59 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Correos</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/Correos.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <h1>Editar Correos</h1>
+            <nav>
+                <ul>
+                    <li><a href="/Monitoreo_Energetico/mapa_principal">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección principal -->
+    <div class="main-section">
+        <!-- Cuadro blanco con contenido -->
+        <div class="content-box">
+            <h2>Lista de Correos de alerta</h2>
+            <div class="email-list" id="emailList"></div>
+            <div class="button-group">
+                <button id="deleteButton" class="btn btn-delete" style="display: none;">Eliminar</button>
+                <button id="addButton" class="btn btn-add">Agregar +</button>
+            </div>
+            <div class="add-form" id="addForm">
+                <input type="email" id="newEmail" class="input-email" placeholder="Ingrese nuevo correo">
+                <button id="submitEmail" class="btn btn-submit">Añadir</button>
+            </div>
+            <div class="message" id="message" style="display: none;"></div>
+        </div>
+    </div>
+
+        <!-- Botón de Ayuda -->
+    <button id="helpBtn" class="help-button">Ayuda</button>
+
+    <!-- Ventana Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Ayuda</h2>
+            <p>Añada o elimine correos de alerta.</p>
+            <ul>
+                <li>Para añadir un correo simplemente seleccionelo en la lista desplegable y presione el boton de "Eliminar".</li>
+                <li>Para añadir un nuevo correo presione el boton de "Agregar +" e introduzca la dirección de correo electronico nueva en la entrada desplegable. Por favor introduzca la dirección exacta sin espacios extra al inicio o al final.</li>
+                <li>Por favor solo introducir direcciones de correo particulares, no listas de distribucion ni agrupaciones.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/static/js/Monitoreo/Correos.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

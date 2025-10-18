@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiempoParo</title>
+    <link rel="stylesheet" href="/static/css/Predictores/Tparo.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Predicción de tiempo en paro</h1>
+            <nav>
+                <ul>
+                    <li><a href="/Predictores/PredictoresMain">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="content">
+        <div class="content-container">
+            <h2>Ingresa datos de la maquina e intervención actual</h2>
+            <form id="predict-form" action="{{ url_for('predictores.TParo') }}" method="POST">
+                <div class="form-group">
+                    <label for="IDMaquina">ID SAP Máquina (8 dígitos):</label>
+                    <p id="idmaquina-error" class="error-message" style="display: none;"></p>
+                    <input type="text" name="IDMaquina" id="IDMaquina" maxlength="8" required autocomplete="off">
+                    <div id="idmaquina-suggestions" class="suggestions"></div>
+                </div>
+                <div class="form-group">
+                    <label for="Dia">Día de inicio:</label>
+                    <select name="Dia" required>
+                        <option value="" disabled selected>Selecciona un día</option>
+                        {% for dia in valid_values.Dia %}
+                            <option value="{{ dia }}">{{ dia }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Mes">Mes de inicio:</label>
+                    <select name="Mes" required>
+                        <option value="" disabled selected>Selecciona un mes</option>
+                        {% for mes in valid_values.Mes %}
+                            <option value="{{ mes }}">{{ mes }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="UAP">UAP:</label>
+                    <select name="UAP" required>
+                        <option value="" disabled selected>Selecciona una UAP</option>
+                        {% for uap in valid_values.UAP %}
+                            <option value="{{ uap }}">{{ uap }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Tipo">Tipo de intervención:</label>
+                    <select name="Tipo" required>
+                        <option value="" disabled selected>Selecciona un tipo</option>
+                        {% for tipo in valid_values.Tipo %}
+                            <option value="{{ tipo }}">{{ tipo }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Tecnico">Técnico:</label>
+                    <select name="Tecnico" required>
+                        <option value="" disabled selected>Selecciona un técnico</option>
+                        {% for tecnico in valid_values.Tecnico %}
+                            <option value="{{ tecnico }}">{{ tecnico }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Hora">Hora de inicio (0-23):</label>
+                    <input type="number" name="Hora" min="0" max="23" required>
+                </div>
+                <div class="form-group">
+                    <label for="Semana">Semana de inicio (1-52):</label>
+                    <input type="number" name="Semana" min="1" max="52" required>
+                </div>
+                <div class="form-group">
+                    <label for="Prioridad">Codigo de prioridad (3: Seguridad | 2: Paro de producción | 1: Otros):</label>
+                    <input type="number" name="Prioridad" min="1" max="3" required>
+                </div>
+                <div class="form-group">
+                    <label for="Prevs_period">Período de preventivos en la máquina (semanas):</label>
+                    <input type="number" name="Prevs_period" step="any" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="Avs_period">Período de aproximado de averías en la máquina (semanas):</label>
+                    <input type="number" name="Avs_period" step="any" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="LPrev">Días transcurridos desde el ultimo preventivo en la maquina hasta la intervención actual:</label>
+                    <input type="number" name="LPrev" step="any" min="0" required>
+                </div>
+                <button type="submit" id="submit-button" disabled>Predecir</button>
+            </form>
+
+            {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+
+            <div class="result-box" id="result-box">
+                {% if prediction is defined %}
+                    <h3>Tiempo estimado en paro:</h3>
+                    <p>{{ prediction }} minutos</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Botón de Ayuda -->
+        <button id="helpBtn" class="help-button">Ayuda</button>
+
+        <!-- Ventana Modal -->
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>Ayuda</h2>
+                <p>Complete todos los campos, son obligatorios.<br>A continuacion se presentan definiciones de utilidad:</p>
+                <ul>
+                    <li>ID de la máquina: Numero SAP de la maquina</li>
+                    <li>Datos temporales de la intervencion: Debera llenar datos temporales (dia, mes, semana, hora) del incio de la intervencion, si aun no inicia el trabajo puede ingresar datos estimados.</li>
+                    <li>Datos operacionales de la intervención: Debera llenar datos operacionales (UAP, tipo, tecnico, prioridad) de la intervencion, si aun no inicia el trabajo puede ingresar datos estimados.</li>
+                    <li>Datos de intervenciones periodicas en la maquina: Debera llenar datos periodicos (periodo de preventivos y averías) del equipo en semanas, es decir cada cuantas semanas se realiza un mantenimiento del tipo que se indica en cada campo, si no se tiene un numero exacto se puede introducir un dato estimado pero cabe mencionar que las predicciones se beneficiaran con informacion mas exacta.</li>
+                    <li>Datos del historial en la maquina: Debera llenar el numero de días que han transcurrido desde el ultimo mantenimiento preventivo en la maquina hasta  que se realiza la intervencion por el paro (avería) actual, si au no inicia el trabajo puede  ingresar un dato estimado.</li>
+                </ul>
+            </div>
+        </div>
+
+    <!-- Pasar valid_IDMaquina al JavaScript como JSON -->
+    <script>
+        const validIDMaquina = {{ valid_values.IDMaquina | tojson | safe }};
+    </script>
+    <script src="/static/js/Predictores/Tparo.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

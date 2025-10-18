@@ -1,0 +1,114 @@
+/* Estilo global */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #30688c, white, #30688c);
+    color: #333;
+}
+
+/* Estilo del título */
+h1 {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Estilo del botón "Volver" */
+#volverButton {
+    position: absolute;
+    top: 0.6rem;
+    right: 2.5rem;
+    background-color: #f4d03f;
+    color: black;
+    border: none;
+    padding: 1.2rem 2.7rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+#volverButton:hover {
+    background-color: #ffb81f;
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+}
+
+/* Estilos para la leyenda de fecha */
+.last-date-container {
+    position: absolute;
+    top: 5rem; 
+    right: 1rem; 
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+#last-date {
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem; 
+    color: #000000;
+    margin: 0;
+}
+
+/* Estilos para la leyenda de colores */
+.leyenda {
+    position: absolute;
+    bottom: 4.5rem; /* Anclado a la parte inferior */
+    left: 1rem; /* Alineado a la izquierda */
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.3rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #000000;
+}
+
+.color-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 0.5rem;
+    border: 1px solid #333;
+}
+
+.color-box-sin-registro {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 0.5rem;
+    background-color: black;
+    border: 2px solid red;
+}
+
+#loadingOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-size: 1.2em;
+    color: #333;
+}
+
+#loadingOverlay.hidden { 
+    display: none; 
+}

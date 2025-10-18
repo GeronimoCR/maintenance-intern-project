@@ -1,0 +1,108 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Objeto</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/EditObj.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Editar maquina</h1>
+            <nav>
+                <ul>
+                    <li><a href="/Monitoreo_Energetico/mapa_principal">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="main-section">
+        <div class="content-box">
+            <div class="left-column">
+                <div class="form-group">
+                    <label for="nombre">Nombre del equipo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="nave">Seleccionar Nave:</label>
+                    <select id="nave" name="nave" required>
+                        <option value="">Seleccione una nave</option>
+                        <option value="1">Nave 1</option>
+                        <option value="2">Nave 2</option>
+                    </select>
+                </div>
+                <div id="errorMsg" class="error"></div>
+            </div>
+            <div class="right-column">
+                <div id="editFields" class="edit-fields">
+                    <div class="form-group">
+                        <label for="x">Coordenada X:<span class="required-asterisk">*</span></label>
+                        <input type="number" id="x" name="x" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="y">Coordenada Y:<span class="required-asterisk">*</span></label>
+                        <input type="number" id="y" name="y" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Enc_NProd">Valor encendido sin producir (KWh):<span class="required-asterisk">*</span></label>
+                        <input type="number" id="Enc_NProd" name="Enc_NProd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Enc_Prod">Valor encendido produciendo (KWh):<span class="required-asterisk">*</span></label>
+                        <input type="number" id="Enc_Prod" name="Enc_Prod" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Alert">Valor de alerta por consumo excesivo (KWh):<span class="required-asterisk">*</span></label>
+                        <input type="number" id="Alert" name="Alert" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Rad">Radio del círculo:<span class="required-asterisk">*</span></label>
+                        <input type="number" id="Rad" name="Rad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Area">UAP de la maquina:<span class="required-asterisk">*</span></label>
+                        <input type="text" id="Area" name="Area" required>
+                    </div>
+                    <div class="button-group">
+                        <button id="editBtn">Editar</button>
+                        <button id="cancelBtn">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Ayuda -->
+    <button id="helpBtn" class="help-button">Ayuda</button>
+
+    <!-- Ventana Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Ayuda</h2>
+            <p>Complete todos los campos, son obligatorios.</p>
+            <ul>
+                <li>Las coordenadas X e Y determinan la posición del equipo en el mapa (en px), al modificar considere que el mapa de Nave 1 es de 1500 x 1000 px, y el de Nave 2 es de 1200 x 800 px.</li>
+                <li>Los valores de consumo deben ingresarse en KWh.</li>
+                <li>Encendido sin producir indica el valor de consumo a partir del cual se considera al equipo SOLO ENCENDIDO.</li>
+                <li>Encendido produciendo indica el valor de consumo a partir del cual se considera al equipo ENCENDIDO Y PRODUCIENDO.</li>
+                <li>Alerta indica el valor de consumo a partir del cual se considera que el equipo presenta un GASTO EXCESIVO DE ENERGIA de acuerdo a sus estandares particulares.</li>
+                <li>Radio es el tamaño del radio del circulo en el mapa (en px), al modificar considere que el mapa de Nave 1 es de 1500 x 1000 px, y el de Nave 2 es de 1200 x 800 px.</li>
+                <li>En UAP de la maquina por favor ingrese exactamente uno de los siguientes datos tal cual aparecen:</li>
+                <li>INYECCIÓN</li>
+                <li>PINTURA</li>
+                <li>REVESTIMIENTOS</li>
+                <li>TABLEROS</li>
+                <li>SERV GENERALES</li>
+                <li>ACCESORIOS</li>
+                
+            </ul>
+        </div>
+    </div>
+
+    <script src="/static/js/Monitoreo/EditObj.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

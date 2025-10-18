@@ -1,0 +1,226 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #0a2463 0%, #0a2463 20%, #f77f00 50%, #0a2463 80%, #0a2463 100%);
+    color: #333;
+}
+
+/* Estilo del encabezado */
+header {
+    padding: 1rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.hero {
+    background: url('/static/diseño/Scorecard/ScoreDB.jpg') no-repeat center center / cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    text-align: center;
+    z-index: 1;
+    padding-top: 10px;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    margin-top: -200px;
+    color: white;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.btn {
+    display: block;
+    margin: 10px auto;
+    background-color: #ffb703;
+    color: #333;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #fb8500;
+}
+
+#volverbtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ffb703;
+    color: #333;
+    border: none;
+    padding: 20px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#volverbtn:hover {
+    background-color: #fb8500;
+}
+
+/* Boton de abrir modal */
+.open-modal-btn {
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    background-color: #ffb703;
+    color: #023047;
+    border: none;
+    padding: 20px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.open-modal-btn:hover {
+    background-color: #fb8500;
+}
+
+/* Ventana modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+/* Contenido de la ventana modal */
+.modal-content {
+    background-color: #eaeaea;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 80%;
+    text-align: center;
+    overflow: auto;
+}
+
+.modal-content h2 {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 1px;
+    margin-top: 0.0001px;
+    color: #023047;
+}
+
+.modal-content p1, .modal-content p2 {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #023047;
+}
+
+.close-modal-btn {
+    background-color: #ffb703;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #023047;
+    font-size: large;
+}
+
+.close-modal-btn:hover {
+    background-color: #fb8500;
+}
+
+/* Estado de subida */
+#estado-subida, #estado-subida-bd {
+    font-size: 1rem;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Estilos para el botón Descargar periodo y la lista */
+#descargar-periodo {
+    display: none;
+    text-align: center; /* Centrar el botón */
+}
+
+.descargar-periodo-btn {
+    position: relative;
+    z-index: 1;
+}
+
+.periodo-lista {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Centrar horizontalmente */
+    background-color: #eaeaea;
+    border: 1px solid #023047;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 150px;
+    z-index: 2;
+}
+
+.periodo-lista li {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #023047;
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.2s ease;
+}
+
+.periodo-lista li:last-child {
+    border-bottom: none;
+}
+
+.periodo-lista li:hover {
+    background-color: #ffb703;
+    color: #333;
+}

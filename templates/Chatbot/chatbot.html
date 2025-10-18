@@ -1,0 +1,22 @@
+<!-- templates/Chatbot/chatbot.html -->
+<div class="chatbot-container">
+    <div class="chatbot-icon" id="chatbot-icon">
+        <img src="/static/diseño/Chatbot/chatbot_icon.png" alt="Chatbot Icon">
+    </div>
+    <div class="chatbot-window" id="chatbot-window" style="display: none;">
+        <div class="chatbot-header">
+            <span>Chatbot</span>
+            <button id="chatbot-close">X</button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta...">
+            <button id="chatbot-send" data-text="Enviar">Enviar</button>
+
+        </div>
+    </div>
+</div>
+
+<!-- Incluir CSS y JS -->
+<link rel="stylesheet" href="/static/css/Chatbot/chatbot.css">
+<script src="/static/js/Chatbot/chatbot.js"></script>

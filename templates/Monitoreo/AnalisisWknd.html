@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Semanal</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/AnalisisWknd.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Análisis Base Load</h1>
+            <nav>
+                <ul>
+                    <li><a href="/AnalisisE/AnalisisMain">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-section">
+        <div class="content-box">
+            <p>Ingresa el archivo de consumo semanal</p>
+            <form id="upload-form" enctype="multipart/form-data">
+                <input type="file" id="excel-file" accept=".xlsx,.xls" required>
+                <button type="submit" class="btn">Procesar</button>
+            </form>
+            <div id="results" style="display: none;">
+                <div class="nave-selector">
+                    <label for="nave-dropdown">Seleccionar Nave:</label>
+                    <select id="nave-dropdown">
+                        <option value="" disabled selected>Selecciona una nave</option>
+                    </select>
+                </div>
+                <div id="period-text" style="display: none;"></div>
+                <div class="image-container" style="display: none;">
+                    <img id="plot-image" src="" alt="Gráfico">
+                    <div class="download-buttons">
+                        <button class="btn download-excel">xls</button>
+                        <button class="btn download-image">img</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Ayuda -->
+    <button id="helpBtn" class="help-button">Ayuda</button>
+
+    <!-- Ventana Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Ayuda</h2>
+            <p>El archivo  Excel subido debe tener las siguientes caracteristicas:</p>
+            <ul>
+                <li>Contener tres hojas llamadas "Datos horarios", "MaquinaUAP", y "MedidoresNave".</li>
+                <li>Datos horarios: Debe contener tal cual la tabla Excel proporcionada por Metron.</li>
+                <li>MaquinaUAP: Debe contener tres columnas "MAQUINA", "UAP", y "NAVE". En "MAQUINA" debe venir el nombre de cada maquina en el archivo de Metron que se requiere incluir en el analisis, en "UAP" debe venir la correspondiente UAP de la maquina, en "NAVE" la correspondiente nave donde se encuentra la maquina.</li>
+                <li>MedidoresNave: Debe contener dos columnas "Medidor", y "Nave". En "Medidor" debe venir el nombre exacto (como viene en la informacion de Metron) de los medidores respecto a los cuales se analizara el consumo minimo el fin de semana (Best Low), en "Nave" debe venir la correpondiente nave del medidor.</li>
+                <li>El codigo distingue entre mayusculas y minusculas, es indispensable mantener la congruencia al registrar la UAP/nave de la maquina y la nave del medidor (en "MaquinaUAP" y "MedidoresNave") para obtener un analisis fidedigno (ej. "Nave 1" y "NAVE 1" se tomaran como dos naves distintas), asi como incluir las maquinas en "MaquinaUAP" exactamente con el mismo nombre que se proporciona en el archivo Metron.</li>
+                <li>Las maquinas no presentes en "MaquinaUAP" no se tomaran en cuenta para el analisis, por el contrario si se encuentran en dicha hoja pero no en las mediciones de Metron no habra datos para analizar en ese equipo por lo que tampoco se incluiran.</li>
+                <li>No se deben tener maquinas o medidores duplicados en "MaquinaUAP" o "MedidoresNave".</li>
+            </ul>
+        </div>
+    </div>
+    <script src="/static/js/Monitoreo/AnalisisWknd.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

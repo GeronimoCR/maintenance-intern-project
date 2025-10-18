@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento Forvia</title>
+    <link rel="stylesheet" href="/static/css/PDFprev/PDF_proceso.css">
+    <script src="/static/js/PDFprev/PDFprev.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Reporte auditorias</h1>
+            <button id="volverbtn" onclick="window.location.href='/PDFprev/PDFprev';">Volver</button>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="content">
+            <h2>Ingresa los documentos en orden y descarga!!!</h2>
+            <button id="selectPDFbtn">Seleccionar PDF</button>
+            <button id="selectEXCELbtn">Seleccionar CSV</button>
+            <p id="fileStatus">Ningún archivo seleccionado</p>
+            <!-- Input de archivo oculto -->
+            <input type="file" id="upload" accept=".xlsx, .xls" style="display: none;" />
+            <div class="buttons-container">
+                <button id="procesarbtn" disabled>Procesar archivos</button>
+                <button id="descargabtn" disabled>Descargar PDF</button>
+        </div>
+    </section>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

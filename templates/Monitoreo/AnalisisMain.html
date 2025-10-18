@@ -1,0 +1,34 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis energetico</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/AnalisisMain.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Analisis Energetico</h1>
+            <nav>
+                <ul>
+                    <li><a href="/Monitoreo_Energetico/mapa_principal">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="main-section">
+        <div class="content-box">
+            <p>Analiza el consumo general o Base Load</p>
+             <div class="image-container">
+                <img src="/static/diseño/Monitorero Energetico/GrafOffenders.png" alt="GraficoOfenders">
+            </div>
+            <button class="btn" onclick="window.location.href='/AnalisisE/AnalisisMen'">Análisis Intervalos generales</button>
+            <button class="btn" onclick="window.location.href='/AnalisisE/AnalisisWknd'">Análisis Base Load</button>
+           
+        </div>
+    </div>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

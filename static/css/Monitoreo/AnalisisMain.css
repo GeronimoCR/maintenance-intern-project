@@ -1,0 +1,102 @@
+/* Estilo global */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #30688c, white, #30688c);
+    color: #333;
+}
+
+/* Estilo del encabezado */
+header {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 1rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Estilo de la sección principal */
+.main-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Estilo del cuadro blanco */
+.content-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    min-width: 600px;
+    min-height: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    gap: 1rem;
+    text-align: center;
+    color: #001b64;
+    font-family: "Arial Black";
+    font-size:  1.5rem;
+	font-weight: 500;
+}
+
+/* Estilo del contenedor de la imagen */
+.image-container {
+    margin-bottom: 1rem; /* Espacio entre la imagen y los botones */
+}
+
+.image-container img {
+    max-width: 100%; /* La imagen no excederá el ancho del contenedor */
+    max-height: 210px; /* Altura máxima para la imagen*/
+    height: auto; /* Mantiene la proporción */
+    display: block; /* Evita espacios no deseados */
+}
+
+/* Estilo de los botones */
+button.btn {
+    background-color: #f7dc6f;
+    color: #000000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+button.btn:hover {
+    background-color: #f4d03f;
+}

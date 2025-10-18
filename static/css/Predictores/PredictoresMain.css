@@ -1,0 +1,249 @@
+/* Reset y Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Sans Pro', Helvetica, sans-serif; /* Mantengo tu fuente */
+    background: #1c2526; /* Gris-azulado oscuro, serio y profesional */
+    color: #e0e6ff; /* Blanco azulado suave para texto */
+    overflow-x: hidden;
+}
+
+/* Encabezado */
+header {
+    background: linear-gradient(90deg, #010930, #2c0258, #010930); /* Degradado con azul profundo y morado */
+    backdrop-filter: blur(8px); /* Efecto de vidrio esmerilado */
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #8739d0; /* Borde neón morado sutil */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Brillo morado ligero */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: #ffffff; /* Blanco puro, sin neón */
+    letter-spacing: 1.2px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav ul li a {
+    color: #ffffff; /* Gris plateado */
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+
+/* Sección Hero */
+.hero {
+    background: url('/static/diseño/Predictores/BrainMI.jpg') no-repeat center center / cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.52); /* Mantenido como pediste */
+}
+
+.content {
+    text-align: center;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    color: #ffffff; /* Blanco puro, sin neón */
+    margin-bottom: 1rem;
+    letter-spacing: 1.2px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: #e0e6ff; /* Blanco azulado suave */
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+.btn {
+    display: block;
+    margin: 1rem auto;
+    background: #0a0f3d; /* Azul profundo */
+    color: #e0e6ff; /* Blanco azulado claro */
+    border: 2px solid #3b82f6; /* Borde azul neón */
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.2);
+}
+
+.btn:hover {
+    background: #1e2a6b; /* Azul más claro al hover */
+    border-color: #60a5fa; /* Borde neón más claro */
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.8); /* Brillo más intenso */
+    transform: translateY(-3px); /* Elevación más notoria */
+}
+
+/* Botón de Modal */
+.open-modal-btn {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    background: #0a0f3d; /* Azul profundo */
+    color: #e0e6ff; /* Blanco azulado claro */
+    border: 2px solid #3b82f6; /* Borde azul neón */
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.2);
+}
+
+.open-modal-btn:hover {
+    background: #1e2a6b; /* Azul más claro */
+    border-color: #60a5fa; /* Borde neón más claro */
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.8);
+    transform: translateY(-3px);
+}
+
+/* Ventana Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(28, 37, 38, 0.85); /* Gris-azulado oscuro */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #0a0f3d; /* Azul profundo */
+    border: 1px solid #3b82f6; /* Borde azul neón */
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: left;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    color: #ffffff; /* Blanco puro, sin neón */
+    margin-bottom: 1rem;
+}
+
+.modal-content p.definition {
+    font-size: 1rem;
+    color: #e0e6ff; /* Blanco azulado suave */
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.close-modal-btn {
+    background: #0a0f3d; /* Azul profundo */
+    color: #e0e6ff; /* Blanco azulado claro */
+    border: 2px solid #3b82f6; /* Borde azul neón */
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 1rem auto 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.2);
+}
+
+.close-modal-btn:hover {
+    background: #1e2a6b; /* Azul más claro */
+    border-color: #60a5fa; /* Borde neón más claro */
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.8);
+    transform: translateY(-3px);
+}
+
+/* Animación de Pulso */
+@keyframes neonPulse {
+    0% { box-shadow: 0 0 6px rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(96, 165, 250, 0.8); }
+    100% { box-shadow: 0 0 6px rgba(59, 130, 246, 0.3); }
+}
+
+.btn:hover,
+.open-modal-btn:hover,
+.close-modal-btn:hover {
+    animation: neonPulse 1s infinite;
+}
+
+/* Responsividad */
+@media screen and (max-width: 768px) {
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .open-modal-btn {
+        top: 60px;
+        right: 20px;
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    nav ul li a {
+        font-size: 0.9rem;
+    }
+}

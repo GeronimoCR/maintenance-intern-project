@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Intervalos Generales</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/AnalisisMen.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Análisis Intervalos Generales</h1>
+            <nav>
+                <ul>
+                    <li><a href="/AnalisisE/AnalisisMain">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-section">
+        <div class="content-box">
+            <p>Ingresa el archivo de consumo</p>
+            <form id="upload-form" enctype="multipart/form-data">
+                <input type="file" id="excel-file" accept=".xlsx,.xls" required>
+                <button type="submit" class="btn">Procesar</button>
+            </form>
+            <div id="results" style="display: none;">
+                <div class="image-container">
+                    <img id="plot-image" src="" alt="Gráfico">
+                    <div class="download-buttons">
+                        <button class="btn download-excel">xls</button>
+                        <button class="btn download-image">img</button>
+                    </div>
+                </div>
+                <div class="uap-selector">
+                    <label for="uap-dropdown">Seleccionar UAP:</label>
+                    <select id="uap-dropdown">
+                        <option value="General">General</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Botón de Ayuda -->
+    <button id="helpBtn" class="help-button">Ayuda</button>
+
+    <!-- Ventana Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Ayuda</h2>
+            <p>El archivo  Excel subido debe tener las siguientes caracteristicas:</p>
+            <ul>
+                <li>Contener dos hojas llamadas "Datos horarios" y "MaquinaUAP"</li>
+                <li>Datos horarios: Debe contener tal cual la tabla Excel proporcionada por Metron.</li>
+                <li>MaquinaUAP: Debe contener tres columnas "MAQUINA", "UAP", y "NAVE". En "MAQUINA" debe venir el nombre de cada maquina en el archivo de Metron que se requiere incluir en el analisis, en "UAP" debe venir la correspondiente UAP de la maquina, en "NAVE" la correspondiente nave donde se encuentra la maquina</li>
+                <li>El codigo distingue entre mayusculas y minusculas, es indispensable mantener la congruencia al registrar la UAP/nave de la maquina para obtener un analisis fidedigno (ej. "Inyeccion" e "INYECCION" se tomaran como dos UAP's distintas), asi como incluir las maquinas en "MaquinaUAP" exactamente con el mismo nombre que se proporciona en el archivo Metron.</li>
+                <li>Las maquinas no presentes en "MaquinaUAP" no se tomaran en cuenta para el analisis, por el contrario si se encuentran en dicha hoja pero no en las mediciones de Metron no habra datos para analizar en ese equipo por lo que tampoco se incluiran.</li>
+                <li>No se deben tener maquinas duplicadas en "MaquinaUAP"</li>
+            </ul>
+        </div>
+    </div>
+    <script src="/static/js/Monitoreo/AnalisisMen.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

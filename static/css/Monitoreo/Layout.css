@@ -1,0 +1,233 @@
+/* Estilo global */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #30688c, white, #30688c);
+    color: #333;
+}
+
+/* Estilo del encabezado */
+header {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 1rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Estilo de la sección principal */
+.main-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Estilo del cuadro blanco */
+.content-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 800px;
+    min-width: 600px;
+    min-height: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+/* Estilo del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Estilo de las etiquetas */
+label {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Estilo del input de archivo */
+input[type="file"] {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 0.8rem;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Estilo del selector */
+select {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 0.8rem;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: #f7dc6f;
+}
+
+/* Estilo del botón */
+button {
+    background-color: #f7dc6f;
+    color: #333;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+}
+
+button:hover {
+    background-color: #f4d03f;
+}
+
+button:disabled {
+    background-color: #ccc;
+    color: black;
+    cursor: not-allowed;
+}
+
+/* Estilo de los mensajes */
+.message {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+/* Estilo del botón de ayuda */
+.help-button {
+    position: absolute;
+    top: 120px;
+    right: 60px;
+    z-index: 1000;
+    background-color: #033468;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 90px;  
+    text-align: center;
+    padding: 10px 0;  
+}
+
+.help-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #000000;
+}
+
+.modal-content p,
+.modal-content ul {
+    color: #000000;
+    line-height: 1.6;
+}
+
+.modal-content ul {
+    padding-left: 20px;
+}

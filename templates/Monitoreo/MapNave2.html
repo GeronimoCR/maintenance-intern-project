@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Consumo Eléctrico</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/Mapa_vista.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <h1>Visualización de NAVE 2</h1>
+    <div id="map" data-mapa="/static/mapas/Nave2.jpg" data-bounds="[[0, 0], [800, 1200]]" data-zona="Nave2"></div>
+    <div id="loadingOverlay">Cargando datos...</div>
+    <button id="volverButton" onclick="window.location.href='/Monitoreo_Energetico/mapa_principal';">Volver</button>
+    
+    <!-- Leyenda de fecha -->
+    <div class="last-date-container">
+        <p id="last-date">Datos del --/--/---- --:--:--</p>
+    </div>
+
+    <!-- Leyenda de colores -->
+    <div class="leyenda">
+        <div class="leyenda-item">
+            <span class="color-box color-box-sin-registro"></span> Sin registro (falla medición)
+        </div>
+        <div class="leyenda-item">
+            <span class="color-box" style="background-color: #795c32;"></span> Apagado
+        </div>
+        <div class="leyenda-item">
+            <span class="color-box" style="background-color: blue;"></span> Encendido sin producir
+        </div>
+        <div class="leyenda-item">
+            <span class="color-box" style="background-color: limegreen;"></span> Encendido produciendo
+        </div>
+        <div class="leyenda-item">
+            <span class="color-box" style="background-color: red;"></span> ALERTA (consumo excesivo)
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="/static/js/Monitoreo/Mapa_vista.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

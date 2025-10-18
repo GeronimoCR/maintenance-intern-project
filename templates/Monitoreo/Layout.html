@@ -1,0 +1,70 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditLayout</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/Layout.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <h1>Editar layout</h1>
+            <nav>
+                <ul>
+                    <li><a href="/Monitoreo_Energetico/mapa_principal">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección principal -->
+    <div class="main-section">
+        <!-- Cuadro blanco con contenido -->
+        <div class="content-box">
+            
+            <!-- Formulario para subir archivo -->
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div>
+                    <label for="file">Seleccionar imagen JPG</label>
+                    <input type="file" id="file" name="file" accept=".jpg,.jpeg" required>
+                </div>
+                <div>
+                    <label for="nave">Seleccionar nave</label>
+                    <select id="nave" name="nave" required>
+                        <option value="" disabled selected>Seleccione una nave</option>
+                        <option value="Nave1">Nave 1</option>
+                        <option value="Nave2">Nave 2</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Actualizar</button>
+                </div>
+            </form>
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <!-- Botón de Ayuda -->
+    <button id="helpBtn" class="help-button">Ayuda</button>
+
+    <!-- Ventana Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Ayuda</h2>
+            <p>Recomendaciones para actualizar Layouts de las naves</p>
+            <ul>
+                <li>Las imagenes aceptadas son exclusivamente archivos jpg, por favor actualizar con archivos que coincidan con dicho formato.</li>
+                <li>Se recomienda que los layouts sean imagenes rectangulares, con el lado mas prolongado en posicion horizontal.</li>
+                <li>Se recomiendan las siguientes medidas en pixeles para evitar distorsion de las imagenes, aunque proporciones equivalentes o parecidas mantendran la simetria aceptable:</li>
+                <li>Layout Nave 1: 2835 x 2004 px</li>
+                <li>Layout Nave 2: 960 x 540 px</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="/static/js/Monitoreo/Layout.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

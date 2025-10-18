@@ -1,0 +1,186 @@
+/* Chatbot */
+.chatbot-container .chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 121px;
+    height: 128px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+}
+
+.chatbot-container .chatbot-icon:hover {
+    width: 135px;
+    height: 151px;
+}
+
+.chatbot-container .chatbot-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.chatbot-container .chatbot-window {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 400px; /* ✅ Aumentamos el ancho */
+    height: 580px;
+    background: #f6f6f6;
+    border: solid 1px #8B1E3F;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px rgba(139, 30, 63, 0.15);
+    display: flex;
+    flex-direction: column; /* ✅ Layout flexible */
+    z-index: 1000;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: 16pt;
+    font-weight: 300;
+    line-height: 1.75;
+}
+
+.chatbot-container .chatbot-header {
+    background: linear-gradient(90deg, #8B1E3F, #004e83);
+    color: #ffffff;
+    padding: 0.75em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+}
+
+.chatbot-container #chatbot-close {
+    all: unset;
+    background: #8B1E3F;
+    border: 1px solid #8B1E3F;
+    color: #ffffff !important;
+    cursor: pointer;
+    font-size: 0.7em;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-weight: 900;
+    padding: 0.5em;
+    border-radius: 4px;
+    text-align: center !important;
+    width: 2.5em;
+    height: 2em;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+.chatbot-container #chatbot-close:hover {
+    background-color: #6B1C2F;
+    color: #FF4D6D; /* Texto vino neón */
+    border: 1px solid #FF4D6D; /* Contorno vino neón */
+    box-shadow: 0 0 6px #FF4D6D; /* Brillo suave */
+}
+
+.chatbot-container .chatbot-messages {
+    flex: 1; 
+    padding: 1em;
+    overflow-y: auto; 
+    border-bottom: solid 1px #8B1E3F;
+    background: #ffffff;
+}
+
+.chatbot-container .chatbot-messages .user-message {
+    margin: 0.5em 0;
+    font-size: 17px; 
+    line-height: 1.5;
+    color: #8B1E3F;
+    text-align: right;
+    background: rgba(139, 30, 63, 0.1);
+    border-radius: 10px 10px 0 10px;
+    padding: 0.5em 1em;
+    margin-left: 20%;
+}
+
+.chatbot-container .chatbot-messages .bot-message {
+    margin: 0.5em 0;
+    font-size: 17px; 
+    line-height: 1.5;
+    color: #003366;
+    text-align: left;
+    background: rgba(0, 51, 102, 0.1);
+    border-radius: 10px 10px 10px 0;
+    padding: 0.5em 1em;
+    margin-right: 20%;
+    white-space: pre-line;
+}
+
+.chatbot-container .chatbot-input {
+    flex-shrink: 0; /* ✅ El input no se comprime */
+    display: flex;
+    padding: 0.75em;
+    background: #ffffff;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-sizing: border-box;
+}
+
+.chatbot-container #chatbot-input {
+    all: unset;
+    flex: 1; 
+    min-width: 0; 
+    padding: 0.5em;
+    border: none;
+    border-bottom: solid 1px #8B1E3F;
+    background: transparent;
+    color: #8B1E3F;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: 0.9em;
+    font-weight: 300;
+    outline: 0;
+    transition: border-bottom-color 0.2s ease-in-out;
+    height: 20px;             
+    min-height: 20px; 
+}
+
+.chatbot-container #chatbot-input:focus {
+    border-bottom-color: #f2849e;
+    box-shadow: inset 0 -1px 0 0 #f2849e;
+}
+
+
+.chatbot-container button#chatbot-send {
+    all: unset;
+    position: relative;
+    flex-shrink: 0;
+    margin-left: 0.5em;
+    padding: 0 0.75em;
+    background: #003366; 
+    border: 1px solid #003366 !important;
+    border-radius: 4px;
+    color: transparent; 
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-size: 0.7em;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    line-height: 2.5em;
+    max-width: 80px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: unset;
+    cursor: pointer;
+    color: #80D9C7 !important;
+}
+
+.chatbot-container button#chatbot-send:hover {
+    background-color: #001224;
+    color: #98ffea !important; 
+    border: 1px solid #98ffea !important; 
+    box-shadow: 0 0 6px #596fea; 
+}
+
+.chatbot-container button#chatbot-send:active {
+    background-color: rgba(0, 34, 68, 0.2);
+}
+
+

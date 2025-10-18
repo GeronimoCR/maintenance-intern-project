@@ -1,0 +1,320 @@
+/* Estilo global */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #30688c, white, #30688c);
+    color: #333;
+}/* Estilo del encabezado */
+header {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem 0;
+}.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+header h1 {
+    font-size: 1.5rem;
+    color: white;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+}
+nav ul li {
+    margin-left: 1rem;
+}nav ul li a {
+    color: white;
+    text-decoration: none;
+}/* Estilo de la sección principal */
+.main-section {
+    text-align: center;
+    margin-top: 2rem;
+}/* Estilo del cuadro blanco (primera caja) */
+.content-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    min-width: 600px;
+    min-height: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}/* Columna izquierda (botón, texto y botones) */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}/* Texto de instrucción y estado del archivo */
+#MapE{
+    font-size: 2rem;
+    color: #30688c;
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: 700; /* Más grueso */
+    font-family: 'Montserrat', 'Segoe UI', sans-serif; /* Fuente moderna y seria */
+}
+
+#monE,#monE1 {
+    font-size: 1.2rem;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#ins, #fileStatus{
+    font-size: 0.7rem;
+    color: #252525;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+   margin: 0;      /* Quita todos los márgenes */
+    padding: 0;     /* Quita todo el padding */
+    line-height: 1; /* Reduce altura de línea */
+}
+
+
+#selectFileButton, #editInterfaceButton {
+    background-color: #f7dc6f;
+    color: #333;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    align-items: center;
+}#selectFileButton:hover, #editInterfaceButton:hover {
+    background-color: #f4d03f;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Apilar elementos verticalmente */
+    justify-content: flex-start;
+    align-items: center;     /* Centrar horizontalmente */
+    gap: 1rem;               /* Espacio entre video y botón */
+}
+#videoPlayer {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}/* Contenedor de botones dentro del cuadro blanco */
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}/* Estilo de los botones */
+button {
+    background-color: #f7dc6f;
+    color: #000000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}button:hover {
+    background-color: #f4d03f;
+}button:disabled {
+    background-color: #ccc;
+    color: black;
+    cursor: not-allowed;
+}/* Menú desplegable */
+.dropdown {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+}#editInterfaceButton {
+    background-color: #f7dc6f;
+    color: #000000;
+    text-align: center;
+}#editInterfaceButton:disabled {
+    background-color: #ccc;
+    color: black;
+    cursor: not-allowed;
+}.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: center;
+}.dropdown-content a {
+    color: black;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+}.dropdown-content a:hover {
+    background-color: #f4d03f;
+    color: #000000;
+    font-weight: bold;
+    transform: translateX(3px);
+}.dropdown-content a[data-disabled="true"] {
+    color: #ccc;
+    cursor: not-allowed;
+    background-color: #f9f9f9;
+}.dropdown-content a[data-disabled="true"]:hover {
+    background-color: #f9f9f9;
+    color: #ccc;
+    font-weight: normal;
+    transform: none;
+}.show-dropdown {
+    display: block;
+}/* Estilo del cuadro blanco para las tablas (content-box2) */
+.content-box2 {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 800px;
+    min-width: 600px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto; /* Espacio superior para separar de content-box */
+    text-align: center;
+}/* Estilo del título del resumen */
+h1#energy-summary-title {
+    font-size: 1.5rem;
+    color: #000000;
+    margin-bottom: 1.5rem;
+}/* Estilo de los títulos de las áreas */
+h2 {
+    font-size: 1.2rem;
+    color: #000000;
+    text-transform: uppercase;
+    margin: 1.5rem 0 1rem 0;
+}/* Estilo de las tablas */
+.energy-table {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 1.5rem auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}.energy-table th,
+.energy-table td {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #000000;
+    font-size: 1rem;
+}.energy-table th {
+    background-color: #f7dc6f; /* Fondo amarillo claro como los botones */
+    font-weight: bold;
+}.energy-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Fondo gris claro para filas pares */
+}.energy-table tbody tr:hover {
+    background-color: #f4d03f; /* Hover amarillo como los botones */
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    font-size: 1.2rem;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.modal-content input {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal-buttons button {
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 120px;
+}
+
+.modal-buttons button:hover {
+    background-color: #f4d03f;
+}
+
+.modal-buttons #modalCancelButton {
+    background-color: #e01414;
+    color: white;
+}
+
+.modal-buttons #modalCancelButton:hover {
+    background-color: #5a0000;
+    color: white;
+}
+
+.modal-buttons #modalAcceptButton {
+    background-color: #00c000;
+    color: white;
+}
+
+.modal-buttons #modalAcceptButton:hover {
+    background-color: #037a03;
+    color: white;
+}

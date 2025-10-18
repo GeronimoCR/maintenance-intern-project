@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scorecard Database</title>
+    <link rel="stylesheet" href="/static/css/Scorecard/ScoreDB.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Mantenimiento Forvia</h1>
+            <button id="volverbtn" onclick="window.location.href='/Scorecard/ScoreIn';">Volver</button>
+        </div>
+    </header>
+    <!-- Ventana Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Ayuda y definiciones</h2>
+            <p1>Limpieza de archivo:<br>Introduce el archivo descargado directamente de MII para extraer la informacion editable.<br>Elige extraer solo un periodo semanal o la base de datos completa del archivo subido.<br></p1>
+            <p2>Subir base de datos:<br>Sube la base de datos con las ordenes actualizadas para obtener los indicadores semanales de las UAP.<br>Revisa que los datos editados se llenaron correctamente, por favor no cambies la estructura de la base de datos (nombre de columnas, nombre de hojas).<br></p2>
+            <button class="close-modal-btn" onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="content">
+            <h2>Limpia el archivo para edicion o actualiza la base de datos</h2>
+            <p>Inovación Planta Techno</p>
+            <button class="open-modal-btn" onclick="abrirModal()">Ayuda</button>
+            <!-- Input oculto para limpieza de archivo -->
+            <input type="file" id="input-archivo" accept=".xlsx, .xls" style="display: none;">
+            <button class="btn" onclick="document.getElementById('input-archivo').click();">Limpieza de archivo (MII)</button>
+            <!-- Botón Descargar periodo con lista desplegable -->
+            <div id="descargar-periodo" style="display: none; margin-top: 10px; position: relative;">
+                <button class="btn descargar-periodo-btn">Descargar periodo</button>
+                <ul class="periodo-lista" style="display: none;">
+                    <!-- Las semanas se llenarán dinámicamente con JS -->
+                </ul>
+            </div>
+            <p id="estado-subida"></p>
+            <!-- Input oculto para base de datos -->
+            <input type="file" id="input-bd" accept=".xlsx, .xls" style="display: none;">
+            <button class="btn" onclick="document.getElementById('input-bd').click();">Subir Base de datos</button>
+            <p id="estado-subida-bd"></p>
+        </div>
+    </section>
+    <script src="/static/js/Scorecard/ScoreDB.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

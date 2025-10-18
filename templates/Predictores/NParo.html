@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NParo</title>
+    <link rel="stylesheet" href="/static/css/Predictores/NParo.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Predicción de siguiente paro</h1>
+            <nav>
+                <ul>
+                    <li><a href="/Predictores/PredictoresMain">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <section class="content">
+        <div class="content-container">
+            <h2>Ingresa datos de la maquina y su ultima intervención</h2>
+            <form id="predict-form" action="{{ url_for('predictores.nparo') }}" method="POST">
+                <div class="form-group">
+                    <label for="Maquina">ID SAP Máquina (8 dígitos):</label>
+                    <p id="maquina-error" class="error-message" style="display: none;"></p>
+                    <input type="text" name="Maquina" id="Maquina" maxlength="8" required autocomplete="off">
+                    <div id="maquina-suggestions" class="suggestions"></div>
+                </div>
+                <p class="Subs">Datos de ultima intervención</p>
+                <div class="form-group">
+                    <label for="Dia">Día:</label>
+                    <select name="Dia" required>
+                        <option value="" disabled selected>Selecciona un día</option>
+                        {% for dia in valid_values['Dia'] %}
+                            <option value="{{ dia }}">{{ dia }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Mes">Mes:</label>
+                    <select name="Mes" required>
+                        <option value="" disabled selected>Selecciona un mes</option>
+                        {% for mes in valid_values['Mes'] %}
+                            <option value="{{ mes }}">{{ mes }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Hora">Hora (0-23):</label>
+                    <input type="number" name="Hora" id="Hora" min="0" max="23" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Semana">Semana (1-52):</label>
+                    <input type="number" name="Semana" id="Semana" min="1" max="52" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Tipo">Tipo de orden:</label>
+                    <select name="Tipo" required>
+                        <option value="" disabled selected>Selecciona un tipo</option>
+                        {% for tipo in valid_values['Tipo'] %}
+                            <option value="{{ tipo }}">{{ tipo }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Prior">Codigo de prioridad (4: Seguridad | 3: Paro de producción | 2: Otros | 1: Minimo)</label>
+                    <input type="number" name="Prior" id="Prior" min="0" max= "4" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="UAP">UAP de la maquina:</label>
+                    <select name="UAP" required>
+                        <option value="" disabled selected>Selecciona una UAP</option>
+                        {% for uap in valid_values['UAP'] %}
+                            <option value="{{ uap }}">{{ uap }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Tecnico">Técnico:</label>
+                    <select name="Tecnico" required>
+                        <option value="" disabled selected>Selecciona un técnico</option>
+                        {% for tecnico in valid_values['Tecnico'] %}
+                            <option value="{{ tecnico }}">{{ tecnico }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <p class="Subs">Datos de historial</p>
+                <div class="form-group">
+                    <label for="L_Av">Días transcurridos desde el correctivo (ZPM1) previo a la ultima intervención<br>hasta la ultima intervención:</label>
+                    <input type="number" name="L_Av" id="L_Av" step="any" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="L_Prev">Días transcurridos desde el preventivo (ZPM2) previo a la ultima intervención<br>hasta la ultima intervención:</label>
+                    <input type="number" name="L_Prev" id="L_Prev" step="any" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="L_Imp">Días transcurridos desde la mejora (ZPM4) previa a la ultima intervención hasta<br>la ultima intervención:</label>
+                    <input type="number" name="L_Imp" id="L_Imp" step="any" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="NoPrev_3m">Ordenes preventivas (ZPM2) en 3 meses previos a la ultima intervención:</label>
+                    <input type="number" name="NoPrev_3m" id="NoPrev_3m" min="0" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="NoAv_3m">Ordenes correctivas (ZPM1) en 3 meses previos a la ultima intervención:</label>
+                    <input type="number" name="NoAv_3m" id="NoAv_3m" min="0" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="NoImp_3m">Ordenes de mejora (ZPM4) en 3 meses previos a la ultima intervención:</label>
+                    <input type="number" name="NoImp_3m" id="NoImp_3m" min="0" step="1" required>
+                </div>
+                <button type="submit" id="submit-button" disabled>Predecir</button>
+            </form>
+
+            {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+
+            <div class="result-box" id="result-box">
+                {% if prediction is defined %}
+                    <h3>Número estimado de días para el siguiente paro<br>a partir de la ultima intervención:</h3>
+                    <p>{{ prediction }} días</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- Botón de Ayuda -->
+        <button id="helpBtn" class="help-button">Ayuda</button>
+
+        <!-- Ventana Modal -->
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>Ayuda</h2>
+                <p>Complete todos los campos, son obligatorios.<br>A continuacion se presentan definiciones de utilidad:</p>
+                <ul>
+                    <li>ID de la máquina: Numero SAP de la maquina</li>
+                    <li>Datos de ultima intervencion: Debera llenar datos temporales (dia, mes, semana, hora) y operacionales (tipo, prioridad, UAP, tecnico) sobre la ultima intervención de mantenimientom realizada en la maquina.</li>
+                    <li>Dias trascurridos (Datos de historial): Debera llenar el número de días transcurridos desde el ultimo mantenimiento (de los tres tipos) realizado antes de la última intervención hasta esta misma</li>
+                    <li>Numero de ordenes en 3 meses previos (Datos historial): Debera llenar la cantidad de mantenimientos (de los tres tipos) efectuados durante los tres meses previos a la última intervención</li>
+                </ul>
+            </div>
+        </div>
+
+
+    <!-- Pasar valid_Maquina al JavaScript como JSON -->
+    <script>
+        const validMaquina = {{ valid_values['Maquina'] | tojson | safe }};
+    </script>
+    <script src="/static/js/Predictores/NParo.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

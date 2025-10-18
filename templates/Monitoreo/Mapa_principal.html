@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumo Eléctrico de la Planta</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/Mapa_principal.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <h1>Mantenimiento Forvia</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Menu principal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección principal -->
+    <div class="main-section">
+        <!-- Cuadro blanco con contenido -->
+        <div class="content-box">
+            <!-- Columna izquierda (botón, texto y botones) -->
+            <div class="left-column">
+                <p id="MapE">MAPAS DE ENERGÍA</p>
+                <p id="monE">Carga de archivo Metron</p>
+                <p id="ins">Los datos seran visibles para todos los usuarios</p>
+                <button id="selectFileButton">Seleccionar Archivo</button>
+                <p id="fileStatus">Espere, verificando datos en servidor...</p>
+                <!-- Input de archivo oculto -->
+                <input type="file" id="upload" accept=".xlsx, .xls" style="display: none;" />
+                <!-- Botones dentro del cuadro blanco -->
+                <p id="monE1">Visualizar mapas</p>
+                <div class="buttons-container">
+                    <button id="MapNave1" disabled>Ver Nave 1</button>
+                    <button id="MapNave2" disabled>Ver Nave 2</button>
+                    <!-- Dropdown para los botones de edición -->
+                    <div class="dropdown">
+                        <button id="editInterfaceButton" disabled>Edición de Interfaz</button>
+                        <div id="editDropdown" class="dropdown-content">
+                            <a href="#" id="EditObj" class="dropdown-item" data-disabled="true">Editar maquina</a>
+                            <a href="#" id="AddObj" class="dropdown-item" data-disabled="true">Agregar maquina</a>
+                            <a href="#" id="DelObj" class="dropdown-item" data-disabled="true">Eliminar maquina</a>
+                            <a href="#" id="Layout" class="dropdown-item" data-disabled="true">Editar Layout</a>
+                            <a href="#" id="Correos" class="dropdown-item" data-disabled="true">Editar correos de alerta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna derecha (video) -->
+            <div class="right-column">
+                <video id="videoPlayer" autoplay loop muted>
+                    <source src="/static/diseño/Monitorero Energetico/Video_Witty_saludando.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+                <button id="AnalisisE"  onclick="window.location.href='/AnalisisE/AnalisisMain'">Analisis energetico</button>
+            </div>
+        </div>
+
+        <!-- Contenedor para las tablas -->
+        <div class="content-box2">
+            <h1 id="energy-summary-title">Resumen consumo energético</h1>
+            <div id="tables-container"></div>
+        </div>
+    </div>
+    <!-- Modal para la contraseña -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>Ingrese la contraseña</h2>
+            <input type="password" id="passwordInput" placeholder="Contraseña" />
+            <div class="modal-buttons">
+                <button id="modalAcceptButton">Aceptar</button>
+                <button id="modalCancelButton">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/Monitoreo/Mapa_principal.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

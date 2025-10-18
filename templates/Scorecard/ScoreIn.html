@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scorecard</title>
+    <link rel="stylesheet" href="/static/css/Scorecard/ScoreIn.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Mantenimiento Forvia</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Menu principal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="content">
+            <h2>Obten tus indicadores semanales con exactitud</h2>
+            <p>Innovación Planta Techno</p>
+            <button class="btn" onclick="window.location.href='/Scorecard/ScoreDB'">Actualizar base de datos Scorecard</button>
+            <button class="btn" onclick="window.location.href='/Scorecard/ScoreInfo'">Acceder a indicadores Scorecard</button>
+        </div>
+    </section>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

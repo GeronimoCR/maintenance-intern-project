@@ -1,0 +1,81 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Objeto</title>
+    <link rel="stylesheet" href="/static/css/Monitoreo/DelObj.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Eliminar maquina</h1>
+            <nav>
+                <ul>
+                    <li><a href="/Monitoreo_Energetico/mapa_principal">Volver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="main-section">
+        <div class="content-box">
+            <div class="left-column">
+                <div class="form-group">
+                    <label for="Nombre">Nombre del equipo:</label>
+                    <input type="text" id="Nombre" name="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="Nave">Seleccionar Nave:</label>
+                    <select id="Nave" name="Nave" required>
+                        <option value="">Seleccione una nave</option>
+                        <option value="1">Nave 1</option>
+                        <option value="2">Nave 2</option>
+                    </select>
+                </div>
+                <div id="errorMsg" class="error"></div>
+            </div>
+            <div class="right-column">
+                <div id="editFields" class="edit-fields">
+                    <div class="form-group">
+                        <label for="x">Coordenada X:</label>
+                        <input type="number" id="x" name="x" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="y">Coordenada Y:</label>
+                        <input type="number" id="y" name="y" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Enc_NProd">Valor encendido sin producir (KWh):</label>
+                        <input type="number" id="Enc_NProd" name="Enc_NProd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Enc_Prod">Valor encendido produciendo (KWh):</label>
+                        <input type="number" id="Enc_Prod" name="Enc_Prod" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Alert">Valor de alerta por consumo excesivo (KWh):</label>
+                        <input type="number" id="Alert" name="Alert" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Rad">Radio del círculo:</label>
+                        <input type="number" id="Rad" name="Rad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Area">UAP de la maquina:</label>
+                        <input type="text" id="Area" name="Area" required>
+                    </div>
+                    <div class="button-group">
+                        <button id="DelBtn">Eliminar</button>
+                        <button id="cancelBtn">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/static/js/Monitoreo/DelObj.js"></script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

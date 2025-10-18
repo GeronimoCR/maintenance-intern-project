@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento Forvia</title>
+    <link rel="stylesheet" href="/static/css/PDFprev/PDFprev.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Mantenimiento Forvia</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Menu principal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Ventana Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Definiciones</h2>
+            <p1>Documento para Auditorias: Contiene unicamente tareas realizadas y comentarios del tecnico.</p1>
+            <p2>Documento para Coordinadores: Contiene tareas realizadas, comentarios del tecnico, y tiempo de duracion.</p2>
+            <button class="close-modal-btn" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="content">
+            <h2>Con un registro digital disminuyes el consumo de papel</h2>
+            <p>Inovación Planta Techno</p>
+            <button class="open-modal-btn" onclick="openModal()">Ayuda</button>
+            <button class="btn" onclick="window.location.href='/PDFprev/auditorias'">Reportes para Auditoria</button>
+            <button class="btn" onclick="window.location.href='/PDFprev/coordinadores'">Reportes para Coordinador</button>
+        </div>
+    </section>
+
+    <script>
+        // Función para abrir la ventana modal
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+        // Función para cerrar la ventana modal
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>

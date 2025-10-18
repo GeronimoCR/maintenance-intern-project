@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento Forvia</title>
+    <link rel="stylesheet" href="/static/css/Predictores/PredictoresMain.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Mantenimiento Forvia</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Menu principal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Ventana Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Definiciones</h2>
+            <p class="definition">Tiempo en paro: Predice la posible duración del tiempo de avería de una máquina ingresando diferentes parámetros operacionales.</p>
+            <p class="definition">Siguiente paro: Predice la posible fecha de la siguiente avería en la máquina ingresando datos estacionales y frecuenciales.</p>
+            <button class="close-modal-btn" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="content">
+            <h2>Ingresa tus datos para predecir posibilidades futuras</h2>
+            <p>Innovación Planta Techno</p>
+            <button class="open-modal-btn" onclick="openModal()">Ayuda</button>
+            <button class="btn" onclick="window.location.href='/Predictores/TParo'">Predecir tiempo en paro</button>
+            <button class="btn" onclick="window.location.href='/Predictores/NParo'">Predecir siguiente paro</button>
+        </div>
+    </section>
+
+    <script>
+        // Función para abrir la ventana modal
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+        // Función para cerrar la ventana modal
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+    {% include 'Chatbot/chatbot.html' %}
+</body>
+</html>
