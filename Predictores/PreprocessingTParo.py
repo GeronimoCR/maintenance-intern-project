@@ -2,7 +2,7 @@ import pandas as pd
 import joblib
 import numpy as np
 
-def preprocess_input(input_data, model_path='Predictores/modelXGB/'):
+def preprocess_input(input_data, model_path='Predictores/modelTParo/'):
     """
     Preprocesa los datos de entrada para el modelo de tiempo de paro.
     
@@ -14,12 +14,12 @@ def preprocess_input(input_data, model_path='Predictores/modelXGB/'):
         pd.DataFrame: Datos preprocesados listos para el modelo
     """
     # Cargar objetos de preprocesamiento
-    ordinal_encoder = joblib.load(f'{model_path}ordinal_encoder.joblib')
-    target_encoder = joblib.load(f'{model_path}target_encoder.joblib')
-    scaler_lprev = joblib.load(f'{model_path}scaler_lprev.joblib')
-    scaler_prevs_period = joblib.load(f'{model_path}scaler_prevs_period.joblib')
-    scaler_avs_period = joblib.load(f'{model_path}scaler_avs_period.joblib')
-    lprev_medians = joblib.load(f'{model_path}lprev_medians.joblib')
+    ordinal_encoder = joblib.load(f'{model_path}/ordinal_encoder.joblib')
+    target_encoder = joblib.load(f'{model_path}/target_encoder.joblib')
+    scaler_lprev = joblib.load(f'{model_path}/scaler_lprev.joblib')
+    scaler_prevs_period = joblib.load(f'{model_path}/scaler_prevs_period.joblib')
+    scaler_avs_period = joblib.load(f'{model_path}/scaler_avs_period.joblib')
+    lprev_medians = joblib.load(f'{model_path}/lprev_medians.joblib')
     
     # Convertir entrada a DataFrame
     data = pd.DataFrame([input_data])
@@ -99,7 +99,7 @@ def preprocess_input(input_data, model_path='Predictores/modelXGB/'):
     return data_scaled
 
 
-def postprocess_output(prediction, model_path='Predictores/modelXGB/'):
+def postprocess_output(prediction, model_path='Predictores/modelTParo/'):
     """
     Revierte las transformaciones de la predicción para obtener minutos reales.
     
@@ -110,8 +110,8 @@ def postprocess_output(prediction, model_path='Predictores/modelXGB/'):
     Returns:
         float: Predicción en minutos reales
     """
-    scaler_minutos = joblib.load(f'{model_path}scaler_minutos.joblib')
-    upper_limit = joblib.load(f'{model_path}upper_limit.joblib')
+    scaler_minutos = joblib.load(f'{model_path}/scaler_minutos.joblib')
+    upper_limit = joblib.load(f'{model_path}/upper_limit.joblib')
     lower_limit = 5  # Límite inferior
     
     # Revertir escalado y transformación logarítmica

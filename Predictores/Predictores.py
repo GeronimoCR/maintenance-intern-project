@@ -16,15 +16,15 @@ nparo_categorical_cols = ['Maquina', 'Dia', 'Mes', 'Tipo', 'UAP', 'Tecnico']
 def load_tparo_resources():
     model_path = os.path.join(os.path.dirname(__file__), 'modelTParo')
     if not os.path.exists(model_path):
-        gdown.download_folder('https://drive.google.com/drive/folders/11c9tzUyvARUwnLLvhIcM3DClacRxpfGt?usp=drive_link', output=model_path, quiet=False)
-    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib').tolist() for col in categorical_cols}
+        gdown.download_folder('https://drive.google.com/drive/folders/1rXqM0bE3yCWe1U0Y3jYOKb0aE3_Y1L2Y', output=model_path, quiet=False)
+    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib') for col in categorical_cols}
     return valid_values, model_path
 
 def load_nparo_resources():
     model_path = os.path.join(os.path.dirname(__file__), 'modelNParo')
     if not os.path.exists(model_path):
-        gdown.download_folder('https://drive.google.com/drive/folders/1E0rLZUDS_j8eSn5AKeImYJ-UxB-B2ak-?usp=drive_link', output=model_path, quiet=False)
-    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib').tolist() for col in nparo_categorical_cols}
+        gdown.download_folder('https://drive.google.com/drive/folders/1E0rLZUDS_j8eSn5AKeImYJ-UxB-B2ak-', output=model_path, quiet=False)
+    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib') for col in nparo_categorical_cols}
     return valid_values, model_path
 
 @predictores_bp.route('/TParo', methods=['GET', 'POST'])

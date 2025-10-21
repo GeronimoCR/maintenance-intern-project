@@ -192,10 +192,9 @@ def process_excel_Tbl(file_path):
         data_dict = {item["Maquina"]: item["Consumo"] for item in data}
         
         # LEER BASES DE DATOS
-        # Diccionario para Nave1 
-        coordenadas1 = pd.read_excel(os.path.join(UPLOAD_FOLDER, 'coordenadas1.xlsx')).set_index('Nombre').to_dict(orient='index')
-        # Diccionario para Nave2 
-        coordenadas2 = pd.read_excel(os.path.join(UPLOAD_FOLDER, 'coordenadas2.xlsx')).set_index('Nombre').to_dict(orient='index')
+        upload_folder = os.path.join(os.path.dirname(__file__), '..', 'Uploads', 'Monitoreo')
+        coordenadas1 = pd.read_excel(os.path.join(upload_folder, 'coordenadas1.xlsx')).set_index('Nombre').to_dict(orient='index')
+        coordenadas2 = pd.read_excel(os.path.join(upload_folder, 'coordenadas2.xlsx')).set_index('Nombre').to_dict(orient='index')
         result = []
         for coordenadas in [coordenadas1, coordenadas2]:
             for maquina in coordenadas:
