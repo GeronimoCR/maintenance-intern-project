@@ -15,20 +15,20 @@ def preprocess_inputN(input_data, model_path='Predictores/modelNParo/'):
     """
     # Cargar objetos de preprocesamiento
     target_encoders = {
-        col: joblib.load(f'{model_path}target_encoder_{col}.joblib')
+        col: joblib.load(f'{model_path}/target_encoder_{col}.joblib')
         for col in ['Maquina', 'Mes', 'Tecnico']  # Ajusta según high_cardinality_cols
     }
-    ordinal_encoder = joblib.load(f'{model_path}ordinal_encoder.joblib')
+    ordinal_encoder = joblib.load(f'{model_path}/ordinal_encoder.joblib')
     scalers = {
-        'scalerlav': joblib.load(f'{model_path}scaler_lav.joblib'),
-        'scalerlprev': joblib.load(f'{model_path}scaler_lprev.joblib'),
-        'scalerlimp': joblib.load(f'{model_path}scaler_limp.joblib'),
-        'scaler_noprev': joblib.load(f'{model_path}scaler_noprev.joblib'),
-        'scaler_noav': joblib.load(f'{model_path}scaler_noav.joblib'),
-        'scaler_noimp': joblib.load(f'{model_path}scaler_noimp.joblib'),
-        'scaler_prior': joblib.load(f'{model_path}scaler_prior.joblib')
+        'scalerlav': joblib.load(f'{model_path}/scaler_lav.joblib'),
+        'scalerlprev': joblib.load(f'{model_path}/scaler_lprev.joblib'),
+        'scalerlimp': joblib.load(f'{model_path}/scaler_limp.joblib'),
+        'scaler_noprev': joblib.load(f'{model_path}/scaler_noprev.joblib'),
+        'scaler_noav': joblib.load(f'{model_path}/scaler_noav.joblib'),
+        'scaler_noimp': joblib.load(f'{model_path}/scaler_noimp.joblib'),
+        'scaler_prior': joblib.load(f'{model_path}/scaler_prior.joblib')
     }
-    winsor_limits = joblib.load(f'{model_path}winsor_limits.joblib')
+    winsor_limits = joblib.load(f'{model_path}/winsor_limits.joblib')
     
     # Convertir entrada a DataFrame
     data = pd.DataFrame([input_data])
@@ -99,8 +99,8 @@ def postprocess_outputN(prediction, model_path='Predictores/modelNParo/'):
     Returns:
         float: Predicción en minutos reales
     """
-    scaler_nxtav = joblib.load(f'{model_path}scaler_nxtav.joblib')
-    winsor_limits = joblib.load(f'{model_path}winsor_limits.joblib')
+    scaler_nxtav = joblib.load(f'{model_path}/scaler_nxtav.joblib')
+    winsor_limits = joblib.load(f'{model_path}/winsor_limits.joblib')
     upper_limit = winsor_limits['Nxt Av']  # Límite superior para Nxt Av
     
     # Revertir escalado y transformación logarítmica
