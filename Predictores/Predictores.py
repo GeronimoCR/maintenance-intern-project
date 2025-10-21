@@ -1,36 +1,21 @@
 from flask import Blueprint, request, render_template
 from flask_cors import CORS
 import pandas as pd
-import numpy as np
 import joblib
-import gdown
-import os
 from .PreprocessingTParo import preprocess_input, postprocess_output
 from .PreprocessingNParo import preprocess_inputN, postprocess_outputN
 
 predictores_bp = Blueprint('predictores', __name__, template_folder='templates', static_folder='static')
 CORS(predictores_bp)
 
+# Cargar valores únicos de las columnas categóricas
 categorical_cols = ['IDMaquina', 'Dia', 'Mes', 'UAP', 'Tipo', 'Tecnico']
-nparo_categorical_cols = ['Maquina', 'Dia', 'Mes', 'Tipo', 'UAP', 'Tecnico']
+valid_values = {col: joblib.load(f'Predictores/modelTParo/valid_{col}.joblib').tolist() for col in categorical_cols}
 
-def load_tparo_resources():
-    model_path = os.path.join(os.path.dirname(__file__), 'modelTParo')
-    if not os.path.exists(model_path):
-        gdown.download_folder('https://drive.google.com/drive/folders/1tw6eEq6zxwswq_blIzU19cKSV3bYzH-q', output=model_path, quiet=False)
-    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib').tolist() if isinstance(joblib.load(f'{model_path}/valid_{col}.joblib'), np.ndarray) else joblib.load(f'{model_path}/valid_{col}.joblib') for col in categorical_cols}
-    return valid_values, model_path
-
-def load_nparo_resources():
-    model_path = os.path.join(os.path.dirname(__file__), 'modelNParo')
-    if not os.path.exists(model_path):
-        gdown.download_folder('https://drive.google.com/drive/folders/1E0rLZUDS_j8eSn5AKeImYJ-UxB-B2ak-', output=model_path, quiet=False)
-    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib').tolist() if isinstance(joblib.load(f'{model_path}/valid_{col}.joblib'), np.ndarray) else joblib.load(f'{model_path}/valid_{col}.joblib') for col in nparo_categorical_cols}
-    return valid_values, model_path
 
 @predictores_bp.route('/TParo', methods=['GET', 'POST'])
 def TParo():
-    valid_values, model_path = load_tparo_resources()
+
     if request.method == 'POST':
         try:
             input_data = {
@@ -51,35 +36,42 @@ def TParo():
             for col in categorical_cols:
                 if input_data[col] not in valid_values[col]:
                     error_message = f"El valor '{input_data[col]}' para {col} no es válido."
-                    print("Error de validación:", error_message)
+                    print("Error de validación:", error_message) # Depurar error
                     return render_template('Predictores/TParo.html', 
                                          valid_values=valid_values, 
                                          error_message=error_message)
 
-            data_processed = preprocess_input(input_data, model_path=model_path)
-            xgb_model = joblib.load(f'{model_path}/xgb_tiempo_paro_model.joblib')
+            data_processed = preprocess_input(input_data)
+
+            xgb_model = joblib.load('Predictores/modelTParo/xgb_tiempo_paro_model.joblib')
             prediction = xgb_model.predict(data_processed)
-            result = postprocess_output(prediction, model_path=model_path)
+            result = postprocess_output(prediction)
             
-            print(f"Predicción TParo: {result}")  # Debug
             return render_template('Predictores/TParo.html', 
                                  valid_values=valid_values, 
                                  prediction=round(result, 2))
 
-        except (ValueError, KeyError, Exception) as e:
+        except (ValueError, KeyError) as e:
             error_message = f"Error en los datos ingresados: {str(e)}"
-            print("Excepción TParo:", error_message)  # Debug
+            print("Excepción:", error_message) # Depurar excepción
             return render_template('Predictores/TParo.html', 
                                  valid_values=valid_values, 
                                  error_message=error_message)
 
     return render_template('Predictores/TParo.html', valid_values=valid_values)
 
+
+
+# Cargar valores únicos de las columnas categóricas para NParo
+nparo_categorical_cols = ['Maquina', 'Dia', 'Mes', 'Tipo', 'UAP', 'Tecnico']
+nparo_valid_values = {col: joblib.load(f'Predictores/modelNParo/valid_{col}.joblib') for col in nparo_categorical_cols}
+#nparo_valid_values = {col: joblib.load(f'Predictores/modelNParo/valid_{col}.joblib').tolist() for col in nparo_categorical_cols}
+
 @predictores_bp.route('/NParo', methods=['GET', 'POST'])
 def nparo():
-    valid_values, model_path = load_nparo_resources()
     if request.method == 'POST':
         try:
+            # Obtener datos del formulario
             input_data = {
                 'Maquina': request.form['Maquina'],
                 'Dia': request.form['Dia'],
@@ -98,32 +90,41 @@ def nparo():
                 'NoImp 3m': float(request.form['NoImp_3m'])
             }
             
+            # Validar valores categóricos
             for col in nparo_categorical_cols:
-                if input_data[col] not in valid_values[col]:
+                if input_data[col] not in nparo_valid_values[col]:
                     error_message = f"El valor '{input_data[col]}' para {col} no es válido."
-                    print("Error de validación NParo:", error_message)  # Debug
+                    print("Error de validación:", error_message)  # Depurar error
                     return render_template('Predictores/NParo.html', 
-                                        valid_values=valid_values, 
+                                        valid_values=nparo_valid_values, 
                                         error_message=error_message)
             
-            data_processed = preprocess_inputN(input_data, model_path=model_path)
-            model = joblib.load(f'{model_path}/xgb_nparo_model.joblib')
-            prediction = model.predict(data_processed)
-            result = postprocess_outputN(prediction, model_path=model_path)
+            # Preprocesar datos
+            data_processed = preprocess_inputN(input_data, model_path='Predictores/modelNParo/')
             
-            print(f"Predicción NParo: {result}")  # Debug
+            # Cargar modelo y predecir
+            model = joblib.load('Predictores/modelNParo/xgb_nparo_model.joblib')
+            prediction = model.predict(data_processed)
+            
+            # Postprocesar predicción
+            result = postprocess_outputN(prediction, model_path='Predictores/modelNParo/')
+            
+            # Renderizar plantilla con el resultado
             return render_template('Predictores/NParo.html', 
-                                valid_values=valid_values, 
+                                valid_values=nparo_valid_values, 
                                 prediction=round(result, 2))
         
-        except (ValueError, KeyError, Exception) as e:
+        except (ValueError, KeyError) as e:
             error_message = f"Error en los datos ingresados: {str(e)}"
-            print("Excepción NParo:", error_message)  # Debug
+            print("Excepción:", error_message)  # Depurar excepción
             return render_template('Predictores/NParo.html', 
-                                valid_values=valid_values, 
+                                valid_values=nparo_valid_values, 
                                 error_message=error_message)
     
-    return render_template('Predictores/NParo.html', valid_values=valid_values)
+    # GET: Mostrar formulario
+    return render_template('Predictores/NParo.html', valid_values=nparo_valid_values)
+
+
 
 @predictores_bp.route('/PredictoresMain')
 def PMain():
