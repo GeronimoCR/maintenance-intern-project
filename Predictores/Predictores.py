@@ -14,7 +14,6 @@ CORS(predictores_bp)
 categorical_cols = ['IDMaquina', 'Dia', 'Mes', 'UAP', 'Tipo', 'Tecnico']
 nparo_categorical_cols = ['Maquina', 'Dia', 'Mes', 'Tipo', 'UAP', 'Tecnico']
 
-
 def load_tparo_resources():
     model_path = os.path.join(os.path.dirname(__file__), 'modelTParo')
     if not os.path.exists(model_path):
@@ -26,7 +25,7 @@ def load_nparo_resources():
     model_path = os.path.join(os.path.dirname(__file__), 'modelNParo')
     if not os.path.exists(model_path):
         gdown.download_folder('https://drive.google.com/drive/folders/1E0rLZUDS_j8eSn5AKeImYJ-UxB-B2ak-', output=model_path, quiet=False)
-    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib') for col in nparo_categorical_cols}
+    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib').tolist() if isinstance(joblib.load(f'{model_path}/valid_{col}.joblib'), np.ndarray) else joblib.load(f'{model_path}/valid_{col}.joblib') for col in nparo_categorical_cols}
     return valid_values, model_path
 
 @predictores_bp.route('/TParo', methods=['GET', 'POST'])
@@ -62,13 +61,14 @@ def TParo():
             prediction = xgb_model.predict(data_processed)
             result = postprocess_output(prediction, model_path=model_path)
             
+            print(f"Predicción TParo: {result}")  # Debug
             return render_template('Predictores/TParo.html', 
                                  valid_values=valid_values, 
                                  prediction=round(result, 2))
 
-        except (ValueError, KeyError) as e:
+        except (ValueError, KeyError, Exception) as e:
             error_message = f"Error en los datos ingresados: {str(e)}"
-            print("Excepción:", error_message)
+            print("Excepción TParo:", error_message)  # Debug
             return render_template('Predictores/TParo.html', 
                                  valid_values=valid_values, 
                                  error_message=error_message)
@@ -101,7 +101,7 @@ def nparo():
             for col in nparo_categorical_cols:
                 if input_data[col] not in valid_values[col]:
                     error_message = f"El valor '{input_data[col]}' para {col} no es válido."
-                    print("Error de validación:", error_message)
+                    print("Error de validación NParo:", error_message)  # Debug
                     return render_template('Predictores/NParo.html', 
                                         valid_values=valid_values, 
                                         error_message=error_message)
@@ -111,13 +111,14 @@ def nparo():
             prediction = model.predict(data_processed)
             result = postprocess_outputN(prediction, model_path=model_path)
             
+            print(f"Predicción NParo: {result}")  # Debug
             return render_template('Predictores/NParo.html', 
                                 valid_values=valid_values, 
                                 prediction=round(result, 2))
         
-        except (ValueError, KeyError) as e:
+        except (ValueError, KeyError, Exception) as e:
             error_message = f"Error en los datos ingresados: {str(e)}"
-            print("Excepción:", error_message)
+            print("Excepción NParo:", error_message)  # Debug
             return render_template('Predictores/NParo.html', 
                                 valid_values=valid_values, 
                                 error_message=error_message)
