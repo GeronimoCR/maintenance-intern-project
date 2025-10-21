@@ -13,11 +13,12 @@ CORS(predictores_bp)
 categorical_cols = ['IDMaquina', 'Dia', 'Mes', 'UAP', 'Tipo', 'Tecnico']
 nparo_categorical_cols = ['Maquina', 'Dia', 'Mes', 'Tipo', 'UAP', 'Tecnico']
 
+
 def load_tparo_resources():
     model_path = os.path.join(os.path.dirname(__file__), 'modelTParo')
     if not os.path.exists(model_path):
         gdown.download_folder('https://drive.google.com/drive/folders/1tw6eEq6zxwswq_blIzU19cKSV3bYzH-q', output=model_path, quiet=False)
-    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib') for col in categorical_cols}
+    valid_values = {col: joblib.load(f'{model_path}/valid_{col}.joblib').tolist() if isinstance(joblib.load(f'{model_path}/valid_{col}.joblib'), np.ndarray) else joblib.load(f'{model_path}/valid_{col}.joblib') for col in categorical_cols}
     return valid_values, model_path
 
 def load_nparo_resources():
