@@ -10,7 +10,14 @@ monitoreo_bp = Blueprint('monitoreo', __name__, template_folder='../Templates', 
 CORS(monitoreo_bp)
 
 # CONFIGURACION CARPETA DE UPLOADS
-UPLOAD_FOLDER = os.path.join('Uploads', 'Monitoreo')
+# CARPETA DE ARCHIVOS ORIGINALES (del código, NO se modifican)
+UPLOAD_FOLDER = '/app/uploads/Monitoreo'
+
+# CARPETA PERSISTENTE (volumen, se reinicia al deploy/restart)
+PERSISTENT_UPLOADS = '/data/Monitoreo'
+
+# Asegurar que existan ambas
+os.makedirs(PERSISTENT_UPLOADS, exist_ok=True)
 ALLOWED_EXTENSIONS = {'xlsx', 'xls'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

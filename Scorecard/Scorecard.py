@@ -16,7 +16,16 @@ scorecard_bp = Blueprint('scorecard', __name__, template_folder='templates', sta
 CORS(scorecard_bp)
 
 # Directorio de uploads
-upload_dir = os.path.join('Uploads', 'Scorecard')
+
+# CARPETA DE ARCHIVOS ORIGINALES (del código, NO se modifican)
+upload_dir = '/app/uploads/Scorecard'
+
+# CARPETA PERSISTENTE (volumen, se reinicia al deploy/restart)
+PERSISTENT_UPLOADS = '/data/Monitoreo'
+
+# Asegurar que existan ambas
+os.makedirs(PERSISTENT_UPLOADS, exist_ok=True)
+
 os.makedirs(upload_dir, exist_ok=True)
 UAP_OPTIONS = {
     "PM1318IN": "INYECCIÓN",
