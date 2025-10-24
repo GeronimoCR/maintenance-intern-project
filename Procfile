@@ -1,0 +1,1 @@
+web: .venv/bin/waitress-serve --host=0.0.0.0 --port=$PORT --threads=6 app:app
