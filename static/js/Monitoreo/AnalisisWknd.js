@@ -1,5 +1,5 @@
-// Manejar la subida del archivo
-document.getElementById('upload-form').addEventListener('submit', async (e) => {
+// Manejar la subida del archivo [DESCOMENTAR]
+/*document.getElementById('upload-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const fileInput = document.getElementById('excel-file');
@@ -37,7 +37,7 @@ document.getElementById('upload-form').addEventListener('submit', async (e) => {
         console.error('Error:', error);
         alert('Error al procesar el archivo');
     }
-});
+});*/
 
 // Manejar la selección de nave
 document.getElementById('nave-dropdown').addEventListener('change', async (e) => {

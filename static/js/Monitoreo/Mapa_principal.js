@@ -1,7 +1,7 @@
-// Escucha el evento 'click' del botón "Seleccionar Archivo"
-document.getElementById('selectFileButton').addEventListener('click', () => {
+// Escucha el evento 'click' del botón "Seleccionar Archivo" [DESCOMENTAR]
+/*document.getElementById('selectFileButton').addEventListener('click', () => {
    document.getElementById('upload').click();
-});
+});*/
 
 // Escucha el evento 'change' del input de archivo
 document.getElementById('upload').addEventListener('change', (e) => {

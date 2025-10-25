@@ -25,8 +25,8 @@ function updateFileStatus() {
     }
 }
 
-// Seleccionar archivo PDF
-document.getElementById('selectPDFbtn').addEventListener('click', () => {
+// Seleccionar archivo PDF [DESCOMETAR]
+/*document.getElementById('selectPDFbtn').addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.pdf';
@@ -35,10 +35,10 @@ document.getElementById('selectPDFbtn').addEventListener('click', () => {
         updateFileStatus();
     };
     input.click();
-});
+});*/
 
-// Seleccionar archivo CSV
-document.getElementById('selectEXCELbtn').addEventListener('click', () => {
+// Seleccionar archivo CSV [DESCOMENTAR]
+/*document.getElementById('selectEXCELbtn').addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.csv';
@@ -47,7 +47,7 @@ document.getElementById('selectEXCELbtn').addEventListener('click', () => {
         updateFileStatus();
     };
     input.click();
-});
+});*/
 
 // Procesar archivos
 document.getElementById('procesarbtn').addEventListener('click', async () => {

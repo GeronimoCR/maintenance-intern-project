@@ -7,8 +7,8 @@ function cerrarModal() {
     document.getElementById('modal').style.display = 'none';
 }
 
-// Limpieza de archivo: Detectar cambio en el input oculto
-document.getElementById('input-archivo').addEventListener('change', async (e) => {
+// Limpieza de archivo: Detectar cambio en el input oculto [DESCOMENTAR]
+/*document.getElementById('input-archivo').addEventListener('change', async (e) => {
     const archivo = e.target.files[0];
     const estado = document.getElementById('estado-subida');
 
@@ -55,7 +55,7 @@ document.getElementById('input-archivo').addEventListener('change', async (e) =>
         estado.textContent = 'Error al procesar el archivo.';
         console.error(error);
     }
-});
+});*/
 
 // Descargar semana específica
 async function descargarSemana(semana) {
@@ -111,8 +111,8 @@ async function descargarCompleto() {
     }
 }
 
-// Subir base de datos: Detectar cambio en el input oculto
-document.getElementById('input-bd').addEventListener('change', async (e) => {
+// Subir base de datos: Detectar cambio en el input oculto [DESCOMENTAR]
+/*document.getElementById('input-bd').addEventListener('change', async (e) => {
     const archivo = e.target.files[0];
     const estado = document.getElementById('estado-subida-bd');
 
@@ -141,7 +141,7 @@ document.getElementById('input-bd').addEventListener('change', async (e) => {
         estado.textContent = 'Error al subir la base de datos.';
         console.error(error);
     }
-});
+});*/
 
 // Mostrar/ocultar lista en hover
 const descargarBtn = document.querySelector('.descargar-periodo-btn');
