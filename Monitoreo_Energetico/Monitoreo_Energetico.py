@@ -18,6 +18,7 @@ PERSISTENT_UPLOADS = '/data/Monitoreo'
 
 # Asegurar que existan ambas
 os.makedirs(PERSISTENT_UPLOADS, exist_ok=True)
+
 ALLOWED_EXTENSIONS = {'xlsx', 'xls'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -199,7 +200,7 @@ def process_excel_Tbl(file_path):
         data_dict = {item["Maquina"]: item["Consumo"] for item in data}
         
         # LEER BASES DE DATOS
-        upload_folder = os.path.join(os.path.dirname(__file__), '..', 'Uploads', 'Monitoreo')
+        upload_folder = UPLOAD_FOLDER
         coordenadas1 = pd.read_excel(os.path.join(upload_folder, 'coordenadas1.xlsx')).set_index('Nombre').to_dict(orient='index')
         coordenadas2 = pd.read_excel(os.path.join(upload_folder, 'coordenadas2.xlsx')).set_index('Nombre').to_dict(orient='index')
         result = []
