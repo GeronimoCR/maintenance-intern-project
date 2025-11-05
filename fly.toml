@@ -1,4 +1,7 @@
 # fly.toml app configuration file generated for maintenance-webpage-project on 2025-10-23T19:09:39-06:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
 app = 'maintenance-webpage-project'
 primary_region = 'ord'
