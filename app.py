@@ -28,28 +28,5 @@ def index():
 
 import os
 if os.environ.get("FLY_APP_NAME"):
-    import threading
-    import time
     from waitress import serve
-
-    # 1. SERVIDOR FALSO que responde en 1 segundo
-    def fake_server():
-        from flask import Flask
-        fake = Flask(__name__)
-        @fake.route('/')
-        def health(): return 'OK', 200
-        serve(fake, host='0.0.0.0', port=8080, threads=1)
-
-    # 2. Lo lanza en un hilo para que Fly vea el puerto YA
-    threading.Thread(target=fake_server, daemon=True).start()
-    print("Salud falsa activada en 0.0.0.0:8080")
-
-    # 3. TE DA 35 SEGUNDOS para que carguen tus modelos ML
-    print("Cargando modelos pesados… (35 seg)")
-    time.sleep(35)
-
-    # 4. AHORA SÍ arranca el servidor REAL
-    print("¡TODO LISTO! Sirviendo tu app real")
-    serve(app, host="0.0.0.0", port=8080, threads=6)
-
-
+    serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), threads=6)
