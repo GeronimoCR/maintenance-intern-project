@@ -1,2 +1,0 @@
-[processes]
-app = ".venv/bin/python app.py"
