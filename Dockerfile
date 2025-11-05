@@ -1,19 +1,15 @@
 FROM python:3.12.6 AS builder
-ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 WORKDIR /app
 
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m venv .venv
+COPY requirements.txt .
+RUN .venv/bin/pip install -r requirements.txt
 
 FROM python:3.12.6-slim
 WORKDIR /app
-COPY --from=builder /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
+COPY --from=builder /app/.venv .venv/
 COPY . .
-WORKDIR /app
-EXPOSE 8080
-CMD ["waitress-serve", "--listen=0.0.0.0:8080", "app:app"]
+
+CMD ["/app/.venv/bin/flask", "run", "--host=0.0.0.0", "--port=8080"]
