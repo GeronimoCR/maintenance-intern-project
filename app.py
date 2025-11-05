@@ -25,7 +25,7 @@ app.register_blueprint(chatbot_bp, url_prefix='/chatbot')
 def index():
     return render_template('index.html')
 
-if __name__ == '__main__':
-    import os
-    port = int(os.environ.get("PORT", 8080))
-    serve(app, host='0.0.0.0', port=port, threads=6)
+import os
+if os.environ.get("FLY_APP_NAME"):
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), threads=6)
