@@ -24,4 +24,4 @@ primary_region = 'ord'
 
 [mounts]
   source = "uploads_data"
-  destination = "/app/uploads"
+  destination = "/data"
