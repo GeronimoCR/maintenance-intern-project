@@ -1,21 +1,4 @@
-# fly.toml app configuration file generated for maintenance-webpage-project on 2025-10-23T19:09:39-06:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
+[processes]
 
-app = 'maintenance-webpage-project'
-primary_region = 'ord'
-
-[build]
-
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = false
-  auto_start_machines = true
-  min_machines_running = 1
-  processes = ['app']
-
-[mounts]
-  source = "uploads_data"
-  destination = "/data"
+[processes]
+app = ".venv/bin/python app.py"
