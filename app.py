@@ -26,9 +26,15 @@ def index():
     return render_template('index.html')
 
 
-import os
-if os.environ.get("FLY_APP_NAME"):
+if __name__ == "__main__":
+    import os
     from waitress import serve
-    serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), threads=6)
+
+    port = int(os.environ.get("PORT", 8080))
+    serve(app, host="0.0.0.0", port=port, threads=6)
+
+    
+    
+    
 
 

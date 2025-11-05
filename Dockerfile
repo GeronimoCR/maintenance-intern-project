@@ -13,9 +13,7 @@ WORKDIR /app
 COPY --from=builder /app/.venv .venv/
 COPY . .
 
-# Exponer el puerto
 EXPOSE 8080
 
-# Ejecutar directamente tu aplicación (usa waitress dentro de app.py)
 CMD ["/app/.venv/bin/python", "app.py"]
 
